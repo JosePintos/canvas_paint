@@ -22,17 +22,20 @@ export const ColorsSelectorComponent: React.FC<ColorsSelectorProps> = ({
 
   return (
     <div
-      className="absolute bg-blue-400 shadow-md rounded-md p-2 text-black"
+      className="absolute bg-white shadow-md rounded-md p-2 border border-gray-300"
       style={{ top: position.y, left: position.x }}
     >
-      <ul>
+      <ul className="flex flex-row gap-1">
         {COLOR_OPTIONS.map((color) => (
           <li
             key={color}
-            className="p-2 hover:bg-gray-300 cursor-pointer"
+            className="flex items-center gap-2 p-2 rounded-md cursor-pointer hover:bg-gray-100"
             onClick={() => handleColorChange(color)}
           >
-            {color}
+            <div
+              className="w-6 h-6 rounded border border-gray-300"
+              style={{ backgroundColor: color }}
+            />
           </li>
         ))}
       </ul>
