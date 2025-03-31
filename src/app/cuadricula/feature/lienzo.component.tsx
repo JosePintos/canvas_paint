@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ColorsSelectorComponent } from "../ui/color-selector.component";
+import { ColorsSelectorComponent } from "../ui/color-selector/color-selector.component";
 import { useSelectedColor } from "../hook/useSelectColor";
-import { ControlsComponent } from "../ui/controls.component";
+import { ControlsComponent } from "../ui/controls/controls.component";
 
 export const LienzoComponent = () => {
   const [squareHeight, setSquareHeight] = useState(window.innerHeight / 100);
@@ -98,10 +98,10 @@ export const LienzoComponent = () => {
         gridStateRef.current.delete(cellKey);
 
         context.clearRect(
-          col * squareHeight + 1,
-          row * squareHeight + 1,
-          squareHeight - 1,
-          squareHeight - 1
+          col * squareHeight,
+          row * squareHeight,
+          squareHeight,
+          squareHeight
         );
 
         context.strokeStyle = "#e5e7eb";
@@ -236,12 +236,12 @@ export const LienzoComponent = () => {
       />
 
       {isMenuOpen && (
-        <div ref={menuRef}>
-          <ColorsSelectorComponent
-            position={position}
-            setMenuVisible={setIsMenuOpen}
-          />
-        </div>
+        <ColorsSelectorComponent
+          position={position}
+          setIsMenuOpen={setIsMenuOpen}
+          isMenuOpen={isMenuOpen}
+          menuRef={menuRef}
+        />
       )}
     </div>
   );

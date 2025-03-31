@@ -1,29 +1,38 @@
 import React from "react";
-import { useSelectedColor } from "../hook/useSelectColor";
+import "./color-selector.css";
+import { useSelectedColor } from "../../hook/useSelectColor";
 
 interface ColorsSelectorProps {
-  setMenuVisible: (visible: boolean) => void;
+  setIsMenuOpen: (visible: boolean) => void;
+  isMenuOpen: boolean;
   position: { x: number; y: number };
+  menuRef: React.RefObject<HTMLDivElement | null>;
 }
 
 const COLOR_OPTIONS = ["Red", "Blue", "Yellow", "Black", "Green"];
 
 export const ColorsSelectorComponent: React.FC<ColorsSelectorProps> = ({
-  setMenuVisible,
+  setIsMenuOpen,
+  isMenuOpen,
   position,
+  menuRef,
 }) => {
   const { setSelectedColor } = useSelectedColor();
 
   const handleColorChange = (color: string) => {
     setSelectedColor(color.toLowerCase());
     localStorage.setItem("mainColor", color.toLowerCase());
-    setMenuVisible(false);
+    setIsMenuOpen(false);
   };
 
   return (
     <div
-      className="absolute bg-white shadow-md rounded-md p-2 border border-gray-300"
+      ref={menuRef}
+      className={`absolute bg-white shadow-md rounded-md p-2 border border-gray-300 ${
+        isMenuOpen ? "fade-enter" : "fade-exit"
+      }`}
       style={{ top: position.y, left: position.x }}
+      onMouseLeave={() => setIsMenuOpen(false)}
     >
       <ul className="flex flex-row gap-1">
         {COLOR_OPTIONS.map((color) => (
