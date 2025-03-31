@@ -204,7 +204,7 @@ export const LienzoComponent = () => {
 
   const handleOpenMenu = (event: React.MouseEvent) => {
     event.preventDefault();
-    setPosition({ x: event.clientX, y: event.clientY });
+    setPosition({ x: event.clientX - 5, y: event.clientY - 5 });
     setIsMenuOpen(true);
   };
 
